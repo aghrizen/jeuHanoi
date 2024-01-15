@@ -4,10 +4,10 @@
   @param[in] o - tour o(rigine)
   @param[in] d - tour d(estination)
 */
-void ToursHanoi::deplacer(int o, int d)
+void ToursHanoi::deplacer(int origin_pos, int dest_pos)
 {
-  HTour &orig = m_tours[o];
-  HTour &dest = m_tours[d];
+  Tour &orig = m_tours[origin_pos];
+  Tour &dest = m_tours[dest_pos];
   int top1 = orig.sommet();
   HDisque dk = orig.getDisque(top1);
   orig.pop();
