@@ -25,5 +25,4 @@ class ToursHanoi
     
     int m_ndeplts; // nombre de deplacements
 };
-#include "ToursHanoi.cpp"
 #endif
