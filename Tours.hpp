@@ -2,6 +2,7 @@
 #ifndef TOURSHANOI_TOUR_CLASS
 #define TOURSHANOI_TOUR_CLASS
 #include <string>
+#include "Disque.hpp"
 using namespace std;
 
 /*
@@ -10,16 +11,16 @@ using namespace std;
 
 #include "Disque.hpp"
 
-const int MAX_DISQUE = ; // Le nombre max des disques pour le jeu 
+const int MAX_DISQUE = 8; // Le nombre max des disques pour le jeu 
 class Tour {
 public: 
   Tour();
   Tour(int n, bool vide);
-  Disque getDisque(int k) const;
-  int sommet() const;
-  void push(const Disque& d);
+  Disque getDisque(int k);
+  int sommet();
+  void push(Disque  &d);
   void pop();
-  vid assign(int taille, bool vide);
+  void assign(int taille, bool vide);
 private:
   // Le pilier
   Disque m_pilier[MAX_DISQUE];
