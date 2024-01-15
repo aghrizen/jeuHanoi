@@ -1,3 +1,4 @@
+#include "Tours.hpp"
 /*
  * Déclaration d'un constructeur par défaut
  */
