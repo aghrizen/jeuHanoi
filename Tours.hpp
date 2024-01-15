@@ -14,20 +14,18 @@ using namespace std;
 const int MAX_DISQUE = 8; // Le nombre max des disques pour le jeu 
 class Tour {
 public: 
-  Tour();
-  Tour(int n, bool vide);
-  Disque getDisque(int k);
-  int sommet();
-  void push(Disque  &d);
-  void pop();
-  void assign(int taille, bool vide);
+  Tour(int TowerTag);
+  Tour(int n);
+  int TourTag;
+  void MoveDisk(Tour &TourDestination);
+  void AddDisk(Disque &Disque);
+  void ShowDiskList();
+
 private:
-  // Le pilier
-  Disque m_pilier[MAX_DISQUE];
+  //Liste de nos disques sur la Tour (dans l'ordre)
+  vector <Disque> ListeDisqueInOrder();
   // L'indice de notre sommet
-  int m_top; 
-  // La dimension du socle
-  int m_dim; 
+  int top_index;
 };
 
 #include "Tour.cpp"
