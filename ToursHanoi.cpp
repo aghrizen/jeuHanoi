@@ -16,14 +16,14 @@ void ToursHanoi::deplacer(int origin_pos, int dest_pos)
   ++m_ndeplts;
 }
 
-/**
-  Methode recursive principale
-  @param[in] n - nombre de disques
-  @param[in] orig - tour origine
-  @param[in] dest - tour destination
-  @param[in] inter - tour intermediaire
-*/
-
+/*
+ * La méthode principale récursive pour le jeu du Hanoi
+ * Les variables:
+ * --> n: le nombre des disques
+ * --> orig: la tour origine
+ * --> dest: la tour de la destination
+ * --> inter: la tour intérmediaire
+ */
 void ToursHanoi::hanoi(int n, int orig, int dest, int inter)
 {
   if (n > 0)
@@ -37,6 +37,9 @@ void ToursHanoi::hanoi(int n, int orig, int dest, int inter)
 
 /**
   Initialise le jeu
+*/
+/*
+ * 
 */
 void ToursHanoi::initialiser()
 {
