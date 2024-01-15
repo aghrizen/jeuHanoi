@@ -1,30 +1,32 @@
 /* 
-   This class contains the declaration of the object: disque 
-   Each 'disque' has it's own size, in the function of the number of diques.
+ * Ce script contient la déclaration de la classe disque
+ * Chaque disque contient sa propre taille, en fonction de nombre des disques choisis par l'utilisateur.
 */
 
-#ifndef TOURSHANOI!DISQUE_CLASS
+// Pour garantir qu'il n'ya pas des doubles inclures:
+#ifndef TOURSHANOI_DISQUE_CLASS
 #define TOURSHANOI_DISQUE_CLASS
 #include <string>
 using namespace std;
 
-// Declaration of the class
+// La déclaration de la classe:
 class Disque {
+// La déclarations des éléments publiques:
 public:
-  // Declaring the constructor
+  // La déclaration du constructeur:
   Disque();
-  // Declaring the constructor with parameters
-  // s is the size
-  // t is the size of the game
-  Disque(int s, int t);   
+  /* La déclaration du constructeur avec ces paramètres
+   * s: la taille
+   * t: la taille du jeu
+   */
+  Disque(int s, int t);
   int getTaille() const;
   // pour retourner une présentation sous forme de chaîne du disque
   string toString() const;
+// La déclaration des éléments privés:
 private:
   // la taille de notre disque
   int m_taille;
   // la taille de notre jeu
   int m_jeusize;
 };
-
-#include "Disque.cpp"
