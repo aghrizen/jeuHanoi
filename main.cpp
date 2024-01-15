@@ -1,5 +1,6 @@
 /*
  * Authors: salma.aghrizen@etu.univ-cotedazur.fr, bastien.briat@etu.univ-cotedazur.fr
+ *
  * Pour l'implémentation du jeu il y'en a deux modes: 
  *   --> mode Default: à l'utilisateur de déplacer les disques
  *   --> mode Démo: à l'ordi de jouer
