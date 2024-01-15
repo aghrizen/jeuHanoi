@@ -1,9 +1,11 @@
 /* 
+ * Authors: salma.aghrizen@etu.univ-cotedazur.fr, bastien.briat@etu.univ-cotedazur.fr
+ *
  * Ce script contient la déclaration de la classe disque
  * Chaque disque contient sa propre taille, en fonction de nombre des disques choisis par l'utilisateur.
 */
 
-// Pour garantir qu'il n'ya pas des doubles inclures:
+// Pour garantir qu'il n'ya pas des doubles inclusions de ce fichier:
 #ifndef TOURSHANOI_DISQUE_CLASS
 #define TOURSHANOI_DISQUE_CLASS
 #include <string>
