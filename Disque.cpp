@@ -1,5 +1,7 @@
 /*
- *Ce script contient la déclaration des fonctions de la classe Disque
+ * Authors: salma.aghrizen@etu.univ-cotedazur.fr, bastien.briat@etu.univ-cotedazur.fr
+ *
+ * Ce script contient la déclaration des fonctions de la classe Disque
  */
 
 #include "Disque.hpp"
