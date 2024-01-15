@@ -1,7 +1,7 @@
 /**
   Constructeur par defaut (tableau)
 */
-HDisque::HDisque()
+Disque::Disque()
 : m_taille(0), m_szjeu(1)
 {}
 
@@ -10,7 +10,7 @@ HDisque::HDisque()
   @param[in] s - taille du jeu
   @param[in] t - taille du disque
  */  
-HDisque::HDisque(int s, int t)
+Disque::Disque(int s, int t)
 : m_taille(t), m_szjeu(s)
 {}
 
@@ -18,7 +18,7 @@ HDisque::HDisque(int s, int t)
   Accesseur de la taille du disque
   @return la taille du disque
 */
-int HDisque::getTaille() const
+int Disque::getTaille() const
 {
   return m_taille;
 }
@@ -27,7 +27,7 @@ int HDisque::getTaille() const
   Equivalent "string" du disque
   @return Equivalent "string" du disque
 */
-string HDisque::toString() const
+string Disque::toString() const
 {
   int nespaces = (getTaille() == 0 ? m_szjeu-1U : m_szjeu-getTaille());
   return string(nespaces, ' ')
