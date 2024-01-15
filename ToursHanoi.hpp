@@ -7,7 +7,7 @@ using namespace std;
 /**
   Les Tours de Hanoi
 */
-#include "HTour.hpp"
+#include "Tour.hpp"
 const int NMAXTOURS = 3;
 class ToursHanoi
 {
