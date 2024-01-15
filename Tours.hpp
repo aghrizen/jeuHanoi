@@ -15,7 +15,7 @@ const int MAX_DISQUE = 8; // Le nombre max des disques pour le jeu
 class Tour {
 public: 
   Tour(int TowerTag);
-  Tour(int n);
+  Tour(int TowerTag, int n);
   int TourTag;
   void MoveDisk(Tour &TourDestination);
   void AddDisk(Disque &Disque);
