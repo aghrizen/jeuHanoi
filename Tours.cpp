@@ -1,20 +1,20 @@
 #include "Tours.hpp"
-/*
- * Déclaration d'un constructeur par défaut
- */
-Tour::Tour()
-: m_top(-1)
-{}
-
-/**
-  Constructeur normal: une tour peut contenir au plus n disques
-  @param[in] n - nombre de tours
-  @param[in] vide - si vrai alors 0
-*/
-Tour::Tour(int n, bool vide)
-: m_top(-1)
+#include "Disque.hpp"
+//Tour vide
+Tour::Tour(int TowerTag)
 {
-  assign(n, vide);
+  TourTag = TowerTag;
+}
+
+//Tour rempli de 1 à n
+Tour::Tour(int TowerTag, int n)
+{
+  TourTag = TowerTag;
+  for (int indexDisque = n; indexDisque > 0; indexDisque--)
+  {
+    Disque tempDisque = Disque(n, MAX_SIZE_GAME);
+    ListeDisqueInOrder.push_back(tempDisque);
+  }
 }
 
 /**
