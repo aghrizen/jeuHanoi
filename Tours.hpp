@@ -27,5 +27,3 @@ private:
   // L'indice de notre sommet
   int top_index;
 };
-
-#include "Tour.cpp"
