@@ -1,9 +1,10 @@
+/*
+ * Ce script contient la déclaration des fonctions du fichier ToursHanoi.hpp
+ */
 
-/**
-  Deplace le disque place au sommet de la tour o au sommet de la tour d
-  @param[in] o - tour o(rigine)
-  @param[in] d - tour d(estination)
-*/
+/*
+ *ToursHanoi: une fonction pour déplacer le disque de la positio origine vers la position destination
+ */
 void ToursHanoi::deplacer(int origin_pos, int dest_pos)
 {
   Tour &orig = m_tours[origin_pos];
@@ -12,7 +13,6 @@ void ToursHanoi::deplacer(int origin_pos, int dest_pos)
   HDisque dk = orig.getDisque(top1);
   orig.pop();
   dest.push(dk);
-  
   ++m_ndeplts;
 }
 
@@ -23,6 +23,7 @@ void ToursHanoi::deplacer(int origin_pos, int dest_pos)
   @param[in] dest - tour destination
   @param[in] inter - tour intermediaire
 */
+
 void ToursHanoi::hanoi(int n, int orig, int dest, int inter)
 {
   if (n > 0)
