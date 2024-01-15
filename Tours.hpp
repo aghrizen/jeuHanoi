@@ -17,7 +17,7 @@ public:
   Tour(int TowerTag);
   Tour(int TowerTag, int n);
   int TourTag;
-  void MoveDisk(Tour &TourDestination);
+  bool MoveDisk(Tour &TourDestination);
   void AddDisk(Disque &Disque);
   void ShowDiskList();
 
