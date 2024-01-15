@@ -32,3 +32,4 @@ private:
   // la taille de notre jeu
   int m_jeusize;
 };
+#endif
