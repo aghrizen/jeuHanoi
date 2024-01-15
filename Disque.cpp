@@ -1,3 +1,4 @@
+#include "Disque.hpp"
 /**
   Constructeur par defaut (tableau)
 */
