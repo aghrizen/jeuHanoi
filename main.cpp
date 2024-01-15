@@ -12,7 +12,7 @@
 #include <list>
 using namespace std;
 
-// La déclaraton du mode démo 
+// La déclaraton du mode démo du jeu
 
 int main() {
   int nombreDisques; //nombre des disques pour le jeu
