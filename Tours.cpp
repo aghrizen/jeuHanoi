@@ -1,7 +1,7 @@
 /*
  * Déclaration d'un constructeur par défaut
  */
-HTour::HTour()
+Tour::Tour()
 : m_top(-1)
 {}
 
@@ -10,7 +10,7 @@ HTour::HTour()
   @param[in] n - nombre de tours
   @param[in] vide - si vrai alors 0
 */
-HTour::HTour(int n, bool vide)
+Tour::Tour(int n, bool vide)
 : m_top(-1)
 {
   assign(n, vide);
@@ -21,7 +21,7 @@ HTour::HTour(int n, bool vide)
   @param[in] k - numero du disque
   @return disque k
 */
-HDisque HTour::getDisque(int k) const
+Disque Tour::getDisque(int k) const
 {
   return m_pilier[k];
 }
@@ -30,7 +30,7 @@ HDisque HTour::getDisque(int k) const
   Accesseur a l'indice du sommet
   @return indice du sommet
 */
-int HTour::sommet() const
+int Tour::sommet() const
 {
   return m_top;
 }
@@ -39,7 +39,7 @@ int HTour::sommet() const
   Met un disque au sommet du pilier
   @param[in] d - un Disque
 */
-void HTour::push(const HDisque& d)
+void Tour::push(const Disque& d)
 {
   m_pilier[++m_top] = d;
 }
@@ -47,9 +47,9 @@ void HTour::push(const HDisque& d)
 /**
   Depile le disque au sommet
 */
-void HTour::pop()
+void Tour::pop()
 {
-  m_pilier[m_top--] = HDisque(m_dim,0);
+  m_pilier[m_top--] = Disque(m_dim,0);
 }
 
 /**
@@ -57,13 +57,13 @@ void HTour::pop()
   @param[in] taille - taille des disques
   @param[in] vide - si vrai alors 0
 */
-void HTour::assign(int taille, bool vide)
+void Tour::assign(int taille, bool vide)
 {
   m_dim = taille;
   // Empile les disques par ordre de diamÃ¨tre decroissant
   for (int ix = 0, t = taille; ix < taille; ++ix, --t)
   {
-    m_pilier[ix] = HDisque(taille, vide ? 0 : t);
+    m_pilier[ix] = Disque(taille, vide ? 0 : t);
   }
   // Actualise le sommet
   m_top = (!vide) ?  taille-1 : -1;
