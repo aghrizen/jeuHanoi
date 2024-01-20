@@ -6,15 +6,18 @@
  */
 
 /*
- *ToursHanoi: une fonction pour déplacer le disque de la positio origine vers la position destination
+ * Rôle: déplacer le disque de la positio origine vers la position destination
+ * paramètres:
+ * --> po: position d'origine
+ * --> pd:position de destination
  */
-void ToursHanoi::deplacer(int origin_pos, int dest_pos) {
-  Tour &orig = m_tours[origin_pos];
-  Tour &dest = m_tours[dest_pos];
-  int top1 = orig.sommet();
-  HDisque dk = orig.getDisque(top1);
+void ToursHanoi::deplacer(int po, int pd) {
+  Tour &orig = m_tours[po]; 
+  Tour &dest = m_tours[pd];
+  int t = orig.sommet(); // t: entier top
+  HDisque d = orig.getDisque(t);
   orig.pop();
-  dest.push(dk);
+  dest.push(d);
   ++m_deplacement;
 }
 
