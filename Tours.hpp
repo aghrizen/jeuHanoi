@@ -24,7 +24,7 @@ public:
 
 private:
   //Liste de nos disques sur la Tour (dans l'ordre)
-  vector <Disque> ListeDisqueInOrder();
+  vector <Disque*> ListeDisqueInOrder();
   // L'indice de notre sommet
   int top_index;
 };
