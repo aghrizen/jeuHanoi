@@ -4,8 +4,8 @@
  ************************************************************************************
  */
 // pour éviter la double inclusion:
-#ifndef TOURSHANOI_TOUR_CLASS
-#define TOURSHANOI_TOUR_CLASS
+#ifndef TOUR_CLASS
+#define TOUR_CLASS
 #include <string>
 #include "Disque.hpp"
 using namespace std;
