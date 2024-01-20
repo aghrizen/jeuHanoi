@@ -22,9 +22,16 @@ Tour::Tour(int TowerTag, int n)
   @param[in] k - numero du disque
   @return disque k
 */
-Disque Tour::getDisque(int k) const
+Disque Tour::getDisque(int k)
 {
-  return m_pilier[k];
+  if(ListeDisqueInOrder.size > k)
+  {
+    return ListeDisqueInOrder(k);
+  }
+  else
+  {
+    return NULL;
+  }
 }
 
 /**
