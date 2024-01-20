@@ -12,7 +12,7 @@
 using namespace std;
 
 #include "Tour.hpp"
-const int NMAXTOURS = 3;
+const int T_MAX = 3; // le nombre MAX des tours
 class ToursHanoi
 {
   public:
@@ -24,7 +24,7 @@ class ToursHanoi
     void hanoi(int n, int orig, int dest, int inter);
     void initialiser();
     
-    HTour m_tours[NMAXTOURS]; // les tours
+    HTour m_tours[T_MAX]; // les tours
     int m_hauteur; // nombre de disques
     
     int m_ndeplts; // nombre de deplacements
