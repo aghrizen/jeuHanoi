@@ -27,6 +27,6 @@ class ToursHanoi
     HTour m_tours[T_MAX]; // les tours
     int m_hauteur; // nombre de disques
     
-    int m_ndeplts; // nombre de deplacements
+    int m_ndeplacement; // nombre de deplacements
 };
 #endif
