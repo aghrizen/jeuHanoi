@@ -42,10 +42,4 @@ int main() {
       return 1;
   }
   return 0;
-]
-  ToursHanoi.start(nd);
-  game.resoudre();
-
-  return 0;
-
 }
