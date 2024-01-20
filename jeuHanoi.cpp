@@ -16,7 +16,7 @@ void ToursHanoi::deplacer(int origin_pos, int dest_pos)
   HDisque dk = orig.getDisque(top1);
   orig.pop();
   dest.push(dk);
-  ++m_ndeplts;
+  ++m_deplacement;
 }
 
 /*
@@ -49,7 +49,7 @@ void ToursHanoi::initialiser()
   m_tours[1].assign(m_hauteur, true);
   // initialiser le troisième élément de m_tours avec m_hauteur éléments avec la valeur true
   m_tours[2].assign(m_hauteur, true);
-  m_ndeplts = 0;
+  m_deplacement = 0;
 }
 
 
@@ -93,7 +93,7 @@ void ToursHanoi::jouer()
   initialiser();
   afficherTours();
   hanoi(m_hauteur, 0, 2, 1);
-  cout<<"Nombre de deplacements = "<<m_ndeplts<<endl;
+  cout<<"Nombre de deplacements = "<<m_deplacement<<endl;
 }
 
 /*
