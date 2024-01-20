@@ -8,8 +8,7 @@
 /*
  *ToursHanoi: une fonction pour déplacer le disque de la positio origine vers la position destination
  */
-void ToursHanoi::deplacer(int origin_pos, int dest_pos)
-{
+void ToursHanoi::deplacer(int origin_pos, int dest_pos) {
   Tour &orig = m_tours[origin_pos];
   Tour &dest = m_tours[dest_pos];
   int top1 = orig.sommet();
@@ -27,10 +26,8 @@ void ToursHanoi::deplacer(int origin_pos, int dest_pos)
  * --> dest: la tour de la destination
  * --> inter: la tour intérmediaire
  */
-void ToursHanoi::hanoi(int n, int orig, int dest, int inter)
-{
-  if (n > 0)
-  {
+void ToursHanoi::hanoi(int n, int orig, int dest, int inter) {
+  if (n > 0) {
     hanoi(n-1, orig, inter, dest);
     deplacer(orig, dest);
     afficherTours();
@@ -41,8 +38,7 @@ void ToursHanoi::hanoi(int n, int orig, int dest, int inter)
 /*
  * Cette fonction permet de initialiser certaines variable de la classe définit dans jeuHanoi.hpp
  */
-void ToursHanoi::initialiser()
-{
+void ToursHanoi::initialiser() {
   // initialiser le premier élément de m_tours avec m_hauteur éléments avec la valeur false
   m_tours[0].assign(m_hauteur, false);
   // initialiser le deuxième élément de m_tours avec m_hauteur éléments avec la valeur true
@@ -68,12 +64,10 @@ ToursHanoi::ToursHanoi(int n)
 /*
  * Cette fonction a pour but d'afficher l'état actuel du jeu
 */
-void ToursHanoi::afficherTours() const
-{
+void ToursHanoi::afficherTours() const {
   // variable 's' pour construire la représentation du jeu
   string s;
-  for (int i = m_hauteur-1; i >= 0; --i)
-  {
+  for (int i = m_hauteur-1; i >= 0; --i) {
     s += m_tours[0].getDisque(x).toString();
     s += m_tours[1].getDisque(x).toString();
     s += m_tours[2].getDisque(x).toString();
@@ -89,8 +83,7 @@ void ToursHanoi::afficherTours() const
 /*
  * Cette fonction permet d'éxecuter le jeu 
 */
-void ToursHanoi::jouer()
-{
+void ToursHanoi::jouer() {
   initialiser();
   afficherTours();
   hanoi(m_hauteur, 0, 2, 1);
