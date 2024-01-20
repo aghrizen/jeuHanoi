@@ -1,3 +1,8 @@
+/*
+ ************************************************************************************
+ * Authors: salma.aghrizen@etu.univ-cotedazur.fr, bastien.briat@etu.univ-cotedazur.fr
+ ************************************************************************************
+ */
 // pour éviter la double inclusion:
 #ifndef TOURSHANOI_TOUR_CLASS
 #define TOURSHANOI_TOUR_CLASS
