@@ -9,7 +9,7 @@
  */
 
 #include <iostream>
-#include "ToursHanoi.hpp"
+#include "jeuHanoi.hpp"
 #include <list>
 using namespace std;
 
