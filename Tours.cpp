@@ -31,42 +31,38 @@ Disque Tour::getDisque(int k) const
   Accesseur a l'indice du sommet
   @return indice du sommet
 */
-int Tour::sommet() const
+bool Tour::MoveDisk(Tour *TourDestination);
 {
-  return m_top;
+  Disque* myTopDisk =   ListeDisqueInOrder.back();
+  bool DidItSuccess;
+  DidItSuccess = TourDestination->AddDisk(myTopDisk)
+  //Si on a réussi à déplacer le disque
+  if (DidItSuccess == true)
+  {
+    //Supprime le disque de la tour actuelle
+    ListeDisqueInOrder.popback()
+  }
+  return DidItSuccess;
 }
 
 /**
   Met un disque au sommet du pilier
   @param[in] d - un Disque
 */
-void Tour::push(const Disque& d)
+bool Tour::AddDisk(Disque *newDisque)
 {
-  m_pilier[++m_top] = d;
-}
+  //Obtient le dernier element 
+  Disque TopDisque = ListeDisqueInOrder.back();
 
-/**
-  Depile le disque au sommet
-*/
-void Tour::pop()
-{
-  m_pilier[m_top--] = Disque(m_dim,0);
-}
-
-/**
-  Retaille la tour et empile les disques
-  @param[in] taille - taille des disques
-  @param[in] vide - si vrai alors 0
-*/
-void Tour::assign(int taille, bool vide)
-{
-  m_dim = taille;
-  // Empile les disques par ordre de diamÃ¨tre decroissant
-  for (int ix = 0, t = taille; ix < taille; ++ix, --t)
+  //Regarde si on a le droit d'ajouter le disque
+  if (TopDisque.getTaille < newDisque->getTaille())
   {
-    m_pilier[ix] = Disque(taille, vide ? 0 : t);
+    ListeDisqueInOrder.push_back(&newDisque);
+    return true;
   }
-  // Actualise le sommet
-  m_top = (!vide) ?  taille-1 : -1;
+  else
+  {
+    return false;
+  }
 }
 
