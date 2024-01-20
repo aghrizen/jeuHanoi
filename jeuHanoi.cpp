@@ -59,9 +59,10 @@ void ToursHanoi::initialiser()
  * Rôle: initialise l'objet ToursHanoi en utilisant une hauteur spécifiée
  */
 ToursHanoi::ToursHanoi(int n)
-: m_hauteur(n < NMAXDISQUES ? n : NMAXDISQUES) {
-  if (n >= NMAXDISQUES) {
-    m_hauteur = NMAXDISQUES;}
+// D_MAX: nombre maximum des disques 
+: m_hauteur(n < D_MAX ? n : D_MAX) {
+  if (n >= D_MAX) {
+    m_hauteur = D_MAX;}
 }
 
 /*
