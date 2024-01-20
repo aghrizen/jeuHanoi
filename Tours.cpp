@@ -1,3 +1,8 @@
+/*
+ ************************************************************************************
+ * Authors: salma.aghrizen@etu.univ-cotedazur.fr, bastien.briat@etu.univ-cotedazur.fr
+ ************************************************************************************
+ */
 #include "Tours.hpp"
 #include "Disque.hpp"
 //Tour vide
