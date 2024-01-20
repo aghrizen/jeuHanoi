@@ -16,13 +16,34 @@ using namespace std;
 // La déclaraton du mode démo du jeu
 
 int main() {
-  int nombreDisques; //nombre des disques pour le jeu
+  int nd; // nombre des disques pour le jeu
+  int choixMode; // choix du mode de jeu: défailt ou démo
   list<int> myliste;
 
   std::cout << "Veuillez choisir un numéro des diques pour commencer le jeu: ";
-  std::cin >> nombreDisques;
+  std::cin >> nd;
 
-  ToursHanoi.start(nombreDisques);
+  cout << "Choisissez le mode de jeu :\n";
+  cout << "1. Mode Default\n";
+  cout << "2. Mode Démo\n";
+  cout << "Votre choix: ";
+  cin >> choixMode;
+  ToursHanoi jeu(nd);
+  switch (choixMode) {
+    case 1:
+      jeu.jouer(); // Deafult Mode: à utilisateur de jouer
+      break;
+    case 2:
+      
+      jeu.resoudre(); // Démo Mode: à l'ordi de jouer
+      break;
+    default:
+      cout << "Choix invalide.\n";
+      return 1;
+  }
+  return 0;
+]
+  ToursHanoi.start(nd);
   game.resoudre();
 
   return 0;
