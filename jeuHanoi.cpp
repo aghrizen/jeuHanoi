@@ -95,3 +95,20 @@ void ToursHanoi::jouer()
   hanoi(m_hauteur, 0, 2, 1);
   cout<<"Nombre de deplacements = "<<m_ndeplts<<endl;
 }
+
+/*
+ * Rôle: cette fonction permet de vérifier si le joueur a gagné
+ * Output: elle retourne 'vrai' si tous les disques sont placés vers la tour de destination
+ * Sinon, elle retourne 'false'
+ */
+bool ToursHanoi::checkWin() const{
+  // Vérifier si tous les conditions sont sur la tour de destination (m_tours[2])
+  for (int i=0; i< m_hauteur; ++i) {
+    if (!m_tours[2].getDisque(i).estPresent()) {
+      // s'il ya un disque qui manque, le joueur ne gangne pas
+      return false;
+    }
+  }
+  // si aucun disque maquant n'est trouvé, le joueur a gagné
+  return true;
+}
