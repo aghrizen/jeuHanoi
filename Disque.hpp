@@ -1,5 +1,7 @@
 /* 
+ ************************************************************************************
  * Authors: salma.aghrizen@etu.univ-cotedazur.fr, bastien.briat@etu.univ-cotedazur.fr
+ ************************************************************************************
  *
  * Ce script contient la déclaration de la classe disque
  * Chaque disque contient sa propre taille, en fonction de nombre des disques choisis par l'utilisateur.
