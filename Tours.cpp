@@ -2,7 +2,10 @@
  ************************************************************************************
  * Authors: salma.aghrizen@etu.univ-cotedazur.fr, bastien.briat@etu.univ-cotedazur.fr
  ************************************************************************************
+ *
+ * Ce script contient la déscription des fonctions du fichier Tours.hpp
  */
+ 
 #include "Tours.hpp"
 #include "Disque.hpp"
 //Tour vide
