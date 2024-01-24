@@ -11,7 +11,7 @@
   * --> po: position d'origine
   * --> pd:position de destination
   */
-
+#include "jeuHanoi.hpp"
 #include "Disque.hpp"
 #include "Tours.hpp"
 #include <iostream>
