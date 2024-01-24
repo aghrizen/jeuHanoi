@@ -5,24 +5,27 @@
  *
  * Ce script contient la déscription des fonctions du fichier Tours.hpp
  */
- 
+
 #include "Tours.hpp"
 #include "Disque.hpp"
-//Tour vide
+ //Tour vide
 Tour::Tour(int TowerTag)
 {
-  TourTag = TowerTag;
+	TourTag = TowerTag;
+	TourSize = 0;
 }
 
 //Tour rempli de 1 à n
 Tour::Tour(int TowerTag, int n)
 {
-  TourTag = TowerTag;
-  for (int indexDisque = n; indexDisque > 0; indexDisque--)
-  {
-    Disque tempDisque = Disque(n, MAX_SIZE_GAME);
-    ListeDisqueInOrder.push_back(tempDisque);
-  }
+	TourTag = TowerTag;
+	TourSize = 0;
+	for (int indexDisque = n; indexDisque > 0; indexDisque--)
+	{
+		Disque* tempDisque = new Disque(indexDisque, MAX_DISQUE);
+		ListeDisqueInOrder.push_back(tempDisque);
+		TourSize++;
+	}
 }
 
 /**
@@ -30,34 +33,38 @@ Tour::Tour(int TowerTag, int n)
   @param[in] k - numero du disque
   @return disque k
 */
-Disque Tour::getDisque(int k)
+Disque* Tour::getDisque(int k)
 {
-  if(ListeDisqueInOrder.size > k)
-  {
-    return ListeDisqueInOrder(k);
-  }
-  else
-  {
-    return NULL;
-  }
+	if (ListeDisqueInOrder.size() > k)
+	{
+		return ListeDisqueInOrder.at(k);
+	}
+	else
+	{
+		return NULL;
+	}
 }
 
 /**
   Accesseur a l'indice du sommet
   @return indice du sommet
 */
-bool Tour::MoveDisk(Tour *TourDestination);
+bool Tour::MoveDisk(Tour *TourDestination)
 {
-  Disque* myTopDisk =   ListeDisqueInOrder.back();
-  bool DidItSuccess;
-  DidItSuccess = TourDestination->AddDisk(myTopDisk)
-  //Si on a réussi à déplacer le disque
-  if (DidItSuccess == true)
-  {
-    //Supprime le disque de la tour actuelle
-    ListeDisqueInOrder.popback()
-  }
-  return DidItSuccess;
+	if (ListeDisqueInOrder.empty() == true)
+		return true;
+
+	Disque* myTopDisk = ListeDisqueInOrder.back();
+	bool DidItSuccess;
+	DidItSuccess = TourDestination->AddDisk(myTopDisk);
+	//Si on a réussi à déplacer le disque
+	if (DidItSuccess)
+	{
+		//Supprime le disque de la tour actuelle
+		ListeDisqueInOrder.pop_back();
+		TourSize--;
+	}
+	return DidItSuccess;
 }
 
 /**
@@ -66,18 +73,30 @@ bool Tour::MoveDisk(Tour *TourDestination);
 */
 bool Tour::AddDisk(Disque *newDisque)
 {
-  //Obtient le dernier element 
-  Disque TopDisque = ListeDisqueInOrder.back();
 
-  //Regarde si on a le droit d'ajouter le disque
-  if (TopDisque.getTaille < newDisque->getTaille())
-  {
-    ListeDisqueInOrder.push_back(&newDisque);
-    return true;
-  }
-  else
-  {
-    return false;
-  }
+	if (ListeDisqueInOrder.empty() == false)
+	{
+		//Obtient le dernier element 
+		Disque* TopDisque = ListeDisqueInOrder.back();
+
+		//Regarde si on a le droit d'ajouter le disque
+		if (TopDisque->getTaille() > newDisque->getTaille())
+		{
+			ListeDisqueInOrder.push_back(newDisque);
+			TourSize++;
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	else
+	{
+		ListeDisqueInOrder.push_back(newDisque);
+		TourSize++;
+		return true;
+	}
+	return false;
+	
 }
-
