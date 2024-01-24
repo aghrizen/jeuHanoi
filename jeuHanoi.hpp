@@ -2,37 +2,35 @@
  ************************************************************************************
  * Authors: salma.aghrizen@etu.univ-cotedazur.fr, bastien.briat@etu.univ-cotedazur.fr
  ************************************************************************************
- *
- * Ce script contient la déclaration de la classe ToursHanoi pour décrir le déroulement du jeu.
+ */
+ // pour éviter la double inclusion:
+#ifndef TOUR_CLASS
+#define TOUR_CLASS
+#include <string>
+#include "Disque.hpp"
+using namespace std;
+#include <vector>
+
+/*
+ *Définition du Tour avec ses disques
  */
 
-#ifndef JEUHANOI_CLASS
-#define JEUHANOI_CLASS
-#include <iostream>
-#include <string>
-#include "Tours.hpp"
-using namespace std;
 
-
-const int T_MAX = 3; // le nombre MAX des tours
-const int T_MAX = 3; // le nombre MAX des tours
-class ToursHanoi
-{
+const int MAX_DISQUE = 8; // Le nombre max des disques pour le jeu 
+class Tour {
 public:
-	explicit ToursHanoi(int n);
-	void afficherTours() const;
-	void jouer();
-	void resoudre();
+	Tour(int TowerTag);
+	Tour(int TowerTag, int n);
+	int TourTag;
+	int TourSize;
+	bool MoveDisk(Tour* TourDestination);
+	bool AddDisk(Disque* Disque);
+	Disque* getDisque(int k);
+
 private:
-	bool deplacer(int o, int d);
-	bool checkWin();
-	void hanoi(int n, int orig, int dest, int inter);
-	void initialiser();
-
-
-	Tour* m_tours[T_MAX]; // les tours
-	int m_hauteur; // nombre de disques
-
-	int m_deplacement; // nombre de deplacements
+	//Liste de nos disques sur la Tour (dans l'ordre)
+	vector <Disque*> ListeDisqueInOrder;
+	// L'indice de notre sommet
+	int top_index;
 };
 #endif
