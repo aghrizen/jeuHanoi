@@ -87,8 +87,9 @@ void ToursHanoi::afficherTours() const {
 		s += "\n";
 	}
 	// construction d'une chaîne de caractères '*' qui représente le socle du jeu
-	s += string(6 * m_hauteur - 1, '*');
-	s += "\n";
+	s += string(47, '-'); // 6*8 - 1 = 47 pour garder toujours même taille 
+	                      // de socle quelque soit le nombre des disques 
+	s +="\n";
 	// affichage de la chaîne du jeu
 	cout << s << endl;
 }
