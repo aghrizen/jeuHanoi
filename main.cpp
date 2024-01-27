@@ -15,7 +15,6 @@
 #include <list>
 using namespace std;
 
-// La déclaraton du mode démo du jeu
 
 int main() {
 	int nd; // nombre des disques pour le jeu
