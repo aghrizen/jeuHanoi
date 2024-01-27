@@ -1,7 +1,7 @@
 CC = g++            # le compilateur à utiliser
 CFLAGS = -g -Wall -pedantic -std=c++11 # les options du compilateur
 LDFLAGS = -lsx       # les options pour l'éditeur de liens
-SRC = main.cpp Tours.c jeuHanoi.cpp Disque.cpp # les fichiers sources
+SRC = main.cpp Tours.cpp jeuHanoi.cpp Disque.cpp # les fichiers sources
 PROG = main          # nom de l'exécutable
 OBJS =  $(SRC:.cpp=.o) # les .o qui en découlent
 .SUFFIXES: .cpp .o     # lien entre les suffixes
