@@ -1,4 +1,4 @@
-CC = gc++            # le compilateur à utiliser
+CC = g++            # le compilateur à utiliser
 CFLAGS = -g -Wall -pedantic -std=c++11 # les options du compilateur
 LDFLAGS = -lsx       # les options pour l'éditeur de liens
 SRC = main.cpp Tours.c jeuHanoi.cpp Disque.cpp # les fichiers sources
