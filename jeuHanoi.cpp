@@ -21,7 +21,7 @@ bool ToursHanoi::deplacer(int po, int pd) {
 	bool IsMovePossible;
 	Tour* orig = m_tours[po];
 	Tour* dest = m_tours[pd];
-	
+
 	IsMovePossible = orig->MoveDisk(dest);
 
 	return IsMovePossible;
@@ -74,25 +74,126 @@ ToursHanoi::ToursHanoi(int n)
 /*
  * Cette fonction a pour but d'afficher l'état actuel du jeu
 */
-void ToursHanoi::afficherTours() const {
+void ToursHanoi::afficherTours() {
+
+	//Disque vide en cas de tour vide, on affiche un disque vide pour prendre l'espace de caractere
+	Disque tempDisque = Disque(0, m_hauteur);
 	// variable 's' pour construire la représentation du jeu
 	string s;
 	for (int i = m_hauteur - 1; i >= 0; --i) {
 		if (m_tours[0]->getDisque(i) != NULL)
 			s += m_tours[0]->getDisque(i)->toString();
+		else
+			s += tempDisque.toString();
+			
 		if (m_tours[1]->getDisque(i) != NULL)
 			s += m_tours[1]->getDisque(i)->toString();
+		else
+			s += tempDisque.toString();
+
 		if (m_tours[2]->getDisque(i) != NULL)
 			s += m_tours[2]->getDisque(i)->toString();
+		else
+			s += tempDisque.toString();
 		s += "\n";
 	}
 	// construction d'une chaîne de caractères '*' qui représente le socle du jeu
 	s += string(47, '-'); // 6*8 - 1 = 47 pour garder toujours même taille 
-	                      // de socle quelque soit le nombre des disques 
-	s +="\n";
+						  // de socle quelque soit le nombre des disques 
+	s += "\n";
 	// affichage de la chaîne du jeu
 	cout << s << endl;
 }
+
+void ToursHanoi::afficherToursNew() 
+{
+	int SpaceBetweenTower = 20;
+	int MinimumXSize = SIZE_X_GAME_BOARD / T_MAX * 0.2F;
+	int MaximumXSize = SIZE_X_GAME_BOARD / T_MAX - SpaceBetweenTower * T_MAX;
+	int SizeY = SIZE_Y_GAME_BOARD / m_hauteur * 0.8F;
+
+	int SizeCurrentDisque;
+	int CurentTowerCenterX;
+
+	
+	SDL_SetRenderDrawColor(myRenderer, 0, 0, 0, 255);
+	SDL_RenderClear(myRenderer);
+
+	for (int indexTower = 0; indexTower < T_MAX; indexTower++)
+	{
+		if (indexTower == 0)
+		{
+			CurentTowerCenterX = MaximumXSize / 2;
+		}
+		else
+		{
+			CurentTowerCenterX = CurentTowerCenterX + MaximumXSize + SpaceBetweenTower;
+		}
+		//DrawTower(indexTower, );
+		for (int indexDisque = 0; indexDisque < m_hauteur; indexDisque++)
+		{
+			if (m_tours[indexTower]->getDisque(indexDisque) != NULL)
+			{
+				SizeCurrentDisque = m_tours[indexTower]->getDisque(indexDisque)->getTaille();
+				DrawDisque(SizeCurrentDisque, indexTower, indexDisque, MinimumXSize, MaximumXSize, SizeY, CurentTowerCenterX);
+			}
+		}
+	}
+	SDL_RenderPresent(myRenderer);
+
+}
+
+
+void ToursHanoi::DrawDisque(int SizeCurrentDisque, int indexTower, int indexDisque, int MinimumXSize, int MaximumXSize, int SizeY, int CurentTowerCenterX)
+{
+	int RED[3] = { 255, 0, 0 };
+	int GREEN[3] = { 0, 255, 0 };
+	int BLUE[3] = { 0, 0, 255 };
+
+
+	int DisqueSizeX = MinimumXSize + (MaximumXSize - MinimumXSize) * SizeCurrentDisque / m_hauteur;
+	int DisqueXpos = CurentTowerCenterX - DisqueSizeX / 2;
+	int DisqueYpos = SIZE_Y_GAME_BOARD - ( 10 + indexDisque * SizeY) - SizeY;
+
+	switch (SizeCurrentDisque % T_MAX)
+	{
+		case 0:
+			CreateRect(DisqueXpos, DisqueYpos, DisqueSizeX, SizeY, RED);
+			break;
+
+		case 1:
+			CreateRect(DisqueXpos, DisqueYpos, DisqueSizeX, SizeY, GREEN);
+			break;
+
+		case 2:
+			CreateRect(DisqueXpos, DisqueYpos, DisqueSizeX, SizeY, BLUE);
+			break;
+
+		default:
+			CreateRect(DisqueXpos, DisqueYpos, DisqueSizeX, SizeY, RED);
+			break;
+	}
+
+	
+
+}
+
+void ToursHanoi::CreateRect(int posX, int posY, int sizeX, int sizeY, int Color[3])
+
+{
+
+	SDL_Rect rect;
+	rect.x = posX;
+	rect.y = posY;
+	rect.w = sizeX;
+	rect.h = sizeY;
+
+	//SDL_RenderClear(renderer);
+	SDL_SetRenderDrawColor(myRenderer, Color[0], Color[1], Color[2], 255);
+	SDL_RenderDrawRect(myRenderer, &rect);
+	SDL_RenderFillRect(myRenderer, &rect);
+}
+
 
 /*
  * Rôle: cette fonction permet de vérifier si le joueur a gagné
@@ -101,7 +202,7 @@ void ToursHanoi::afficherTours() const {
  */
 bool ToursHanoi::checkWin() {
 	// Si la derniere tour a atteint la hauteur max --> Tout les disques sont sur la derniee tour
-	if (m_tours[2]->TourSize >= m_hauteur) 
+	if (m_tours[2]->TourSize >= m_hauteur)
 	{
 		return true;
 	}
@@ -133,9 +234,11 @@ void ToursHanoi::jouer() {
 	int origine_index;
 	int destination_index;
 	bool IsMoveLegal;
+	InitSDL(&window);
 
 	while (checkWin() == false)
 	{
+		afficherToursNew();
 		afficherTours();
 
 		cout << "Choisir la colonne origine, puis la colonne destination, de 1 à 3, sans espace" << endl;
@@ -147,7 +250,7 @@ void ToursHanoi::jouer() {
 		if (origine_index >= 1 && origine_index <= 3 && destination_index >= 1 && destination_index <= 3)
 		{
 
-			IsMoveLegal = m_tours[origine_index -1]->MoveDisk(m_tours[destination_index -1]);
+			IsMoveLegal = m_tours[origine_index - 1]->MoveDisk(m_tours[destination_index - 1]);
 
 			if (IsMoveLegal == true)
 			{
@@ -164,9 +267,9 @@ void ToursHanoi::jouer() {
 			//Aficher rouge
 			cout << "Numéro de tour invalide, veuillez recommencer" << endl;
 		}
-		
+
 	}
-	
+
 
 
 
@@ -178,4 +281,21 @@ void ToursHanoi::jouer() {
 	else {
 		cout << "Vous n'avez pas gagné :( ." << endl;
 	}
+}
+
+unsigned char ToursHanoi::InitSDL(SDL_Window **window) {
+	if (0 != SDL_Init(SDL_INIT_VIDEO))
+	{
+		return EXIT_FAILURE;
+	}
+	*window = SDL_CreateWindow("SDL2", 0, 0,
+		SIZE_X_GAME_BOARD, SIZE_Y_GAME_BOARD, SDL_WINDOW_SHOWN);
+	if (NULL == *window)
+	{
+		return EXIT_FAILURE;
+	}
+
+	SDL_CreateRenderer(*window, 0, SDL_INIT_VIDEO);
+	myRenderer = SDL_GetRenderer(*window);
+	return 0;
 }
