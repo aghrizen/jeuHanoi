@@ -1,6 +1,7 @@
 CC = g++            # le compilateur à utiliser
 CFLAGS = -g -Wall -pedantic -std=c++11 # les options du compilateur
-LDFLAGS = -lsx       # les options pour l'éditeur de liens
+LDFLAGS = -lSDL2       # les options pour l'éditeur de liens
+LDLIBS = -lSDL2
 SRC = main.cpp Tours.cpp jeuHanoi.cpp Disque.cpp # les fichiers sources
 PROG = main          # nom de l'exécutable
 OBJS =  $(SRC:.cpp=.o) # les .o qui en découlent
@@ -16,8 +17,7 @@ $(PROG): $(OBJS)
 Disque.o : Disque.hpp
 Tours.o : Tours.hpp Disque.hpp
 
-jeuHanoi.o : jeuHanoi.hpp Disque.hpp Tours.hpp
-vue.o : callbacks.h data.h
+jeuHanoi.o : jeuHanoi.hpp Disque.hpp Tours.hpp 
 main.o : jeuHanoi.hpp Tours.hpp Disque.hpp
 %.o: %.cpp
 	$(CC) $(CFLAGS) -c $<

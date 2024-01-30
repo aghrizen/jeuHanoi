@@ -8,6 +8,8 @@
 
 #include "Tours.hpp"
 #include "Disque.hpp"
+#include <iostream>
+
  //Tour vide
 Tour::Tour(int TowerTag)
 {
@@ -20,6 +22,7 @@ Tour::Tour(int TowerTag, int n)
 {
 	TourTag = TowerTag;
 	TourSize = 0;
+	
 	for (int indexDisque = n; indexDisque > 0; indexDisque--)
 	{
 		Disque* tempDisque = new Disque(indexDisque, MAX_DISQUE);
@@ -33,7 +36,7 @@ Tour::Tour(int TowerTag, int n)
   @param[in] k - numero du disque
   @return disque k
 */
-Disque* Tour::getDisque(int k)
+Disque* Tour::getDisque(long unsigned k)
 {
 	if (ListeDisqueInOrder.size() > k)
 	{

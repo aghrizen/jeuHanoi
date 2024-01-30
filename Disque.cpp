@@ -6,16 +6,24 @@
  */
 
 #include "Disque.hpp"
+#include <iostream>
+using namespace std;
+
 
  // Un constructeur par défaut.
-Disque::Disque() : m_taille(0), m_jeusize(1) {}
+Disque::Disque() : m_taille(0), m_jeusize(1) 
+{
+}
 
 /*
  * Un constructeur normal avec les paramètres du disque:
  *   t = la taille du jeu
  *   s = la taille du disque
  */
-Disque::Disque(int s, int t) : m_taille(s), m_jeusize(t) {}
+ Disque::Disque(int s, int t) : m_taille(s), m_jeusize(t) 
+{
+}
+
 
 /*
  * Fonction getTaille(): fonction qui retourne la taille de disque.

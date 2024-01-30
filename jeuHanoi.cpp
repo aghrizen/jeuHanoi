@@ -14,6 +14,7 @@
 #include "jeuHanoi.hpp"
 #include "Disque.hpp"
 #include "Tours.hpp"
+#include <thread>
 #include <iostream>
 using namespace std;
 
@@ -40,6 +41,9 @@ void ToursHanoi::hanoi(int n, int orig, int dest, int inter) {
 		hanoi(n - 1, orig, inter, dest);
 		deplacer(orig, dest);
 		afficherTours();
+		afficherToursNew();
+		std::this_thread::sleep_for(std::chrono::milliseconds(200));
+		
 		hanoi(n - 1, inter, dest, orig);
 	}
 }
@@ -55,6 +59,7 @@ void ToursHanoi::initialiser() {
 	// initialiser le troisième élément de m_tours avec m_hauteur éléments avec la valeur true
 	m_tours[2] = new Tour(3);
 	m_deplacement = 0;
+	
 }
 
 
@@ -135,7 +140,10 @@ void ToursHanoi::afficherToursNew()
 			if (m_tours[indexTower]->getDisque(indexDisque) != NULL)
 			{
 				SizeCurrentDisque = m_tours[indexTower]->getDisque(indexDisque)->getTaille();
-				DrawDisque(SizeCurrentDisque, indexTower, indexDisque, MinimumXSize, MaximumXSize, SizeY, CurentTowerCenterX);
+				DrawDisque
+				(
+					SizeCurrentDisque, indexTower, indexDisque, MinimumXSize, MaximumXSize, SizeY, CurentTowerCenterX
+				);
 			}
 		}
 	}
@@ -146,39 +154,67 @@ void ToursHanoi::afficherToursNew()
 
 void ToursHanoi::DrawDisque(int SizeCurrentDisque, int indexTower, int indexDisque, int MinimumXSize, int MaximumXSize, int SizeY, int CurentTowerCenterX)
 {
-	int RED[3] = { 255, 0, 0 };
-	int GREEN[3] = { 0, 255, 0 };
-	int BLUE[3] = { 0, 0, 255 };
 
 
 	int DisqueSizeX = MinimumXSize + (MaximumXSize - MinimumXSize) * SizeCurrentDisque / m_hauteur;
 	int DisqueXpos = CurentTowerCenterX - DisqueSizeX / 2;
 	int DisqueYpos = SIZE_Y_GAME_BOARD - ( 10 + indexDisque * SizeY) - SizeY;
+	
+	
+	unsigned char bleu[3]={170,219,225};
+	unsigned char	roseP[3]={255,182,193};
+	unsigned char	vert[3]={218,242,164};
+	unsigned char	beige[3]={245,245,220};
+	unsigned char	violetC[3] ={200,162,200};
+	unsigned char	violetP[3]={219,187,255};
+	unsigned char	beigeP[3]={222,184,135};
+	unsigned char	rouge[3]={255,211,210};
 
-	switch (SizeCurrentDisque % T_MAX)
+
+	switch (SizeCurrentDisque % 8)
 	{
 		case 0:
-			CreateRect(DisqueXpos, DisqueYpos, DisqueSizeX, SizeY, RED);
+			CreateRect(DisqueXpos, DisqueYpos, DisqueSizeX, SizeY, bleu);
 			break;
 
 		case 1:
-			CreateRect(DisqueXpos, DisqueYpos, DisqueSizeX, SizeY, GREEN);
+			CreateRect(DisqueXpos, DisqueYpos, DisqueSizeX, SizeY, roseP);
 			break;
 
 		case 2:
-			CreateRect(DisqueXpos, DisqueYpos, DisqueSizeX, SizeY, BLUE);
+			CreateRect(DisqueXpos, DisqueYpos, DisqueSizeX, SizeY, vert);
+			break;
+			
+		case 3:
+			CreateRect(DisqueXpos, DisqueYpos, DisqueSizeX, SizeY, beige);
+			break;
+			
+		case 4:
+			CreateRect(DisqueXpos, DisqueYpos, DisqueSizeX, SizeY, violetC);
+			break;
+
+		case 5:
+			CreateRect(DisqueXpos, DisqueYpos, DisqueSizeX, SizeY, violetP);
+			break;
+			
+		case 6:
+			CreateRect(DisqueXpos, DisqueYpos, DisqueSizeX, SizeY, beigeP);
+			break;
+		case 7:
+			CreateRect(DisqueXpos, DisqueYpos, DisqueSizeX, SizeY, rouge);
 			break;
 
 		default:
-			CreateRect(DisqueXpos, DisqueYpos, DisqueSizeX, SizeY, RED);
-			break;
+			CreateRect(DisqueXpos, DisqueYpos, DisqueSizeX, SizeY, rouge);
+		
 	}
+
 
 	
 
 }
 
-void ToursHanoi::CreateRect(int posX, int posY, int sizeX, int sizeY, int Color[3])
+void ToursHanoi::CreateRect(int posX, int posY, int sizeX, int sizeY, unsigned char Color[3])
 
 {
 
@@ -216,7 +252,11 @@ bool ToursHanoi::checkWin() {
 */
 void ToursHanoi::resoudre() {
 	initialiser();
+	InitSDL(&window);
 	afficherTours();
+	afficherToursNew();
+	
+	
 	hanoi(m_hauteur, 0, 2, 1);
 	cout << "Nombre de deplacements = " << m_deplacement << endl;
 
@@ -230,7 +270,7 @@ void ToursHanoi::resoudre() {
 
 void ToursHanoi::jouer() {
 	initialiser();
-	string reponse;
+	string reponse = "";
 	int origine_index;
 	int destination_index;
 	bool IsMoveLegal;
@@ -242,10 +282,12 @@ void ToursHanoi::jouer() {
 		afficherTours();
 
 		cout << "Choisir la colonne origine, puis la colonne destination, de 1 à 3, sans espace" << endl;
+		while(reponse.size() < 1)
 		cin >> reponse;
 
 		origine_index = reponse[0] - '0';
 		destination_index = reponse[1] - '0';
+		reponse = "";
 
 		if (origine_index >= 1 && origine_index <= 3 && destination_index >= 1 && destination_index <= 3)
 		{

@@ -10,6 +10,7 @@
 #include "Disque.hpp"
 using namespace std;
 #include <vector>
+#include <random>
 
 const int MAX_DISQUE = 8; // Le nombre max des disques pour le jeu 
 class Tour {
@@ -20,7 +21,7 @@ public:
 	int TourSize;
 	bool MoveDisk(Tour* TourDestination);
 	bool AddDisk(Disque* Disque);
-	Disque* getDisque(int k);
+	Disque* getDisque(long unsigned k);
 
 private:
 	//Liste de nos disques sur la Tour (dans l'ordre)
@@ -28,3 +29,4 @@ private:
 	// L'indice de notre sommet
 	int top_index;
 };
+#endif

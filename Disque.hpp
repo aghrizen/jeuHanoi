@@ -11,6 +11,9 @@
 #ifndef TOURSHANOI_DISQUE_CLASS
 #define TOURSHANOI_DISQUE_CLASS
 #include <string>
+#include <random>
+
+
 using namespace std;
 
 // La déclaration de la classe:
@@ -23,16 +26,21 @@ public:
 	 * s: la taille
 	 * t: la taille du jeu
 	 */
-	Disque(int s, int t);
+	 Disque(int s, int t);
+	 Disque(int s, int t, unsigned char ColorDisk[3]);
+	
 	int getTaille();
+	void getColor(unsigned char Color[3]);
 	// pour retourner une présentation sous forme de chaîne du disque
 	string toString();
+	unsigned char ColorDisk[3];
 	// La déclaration des éléments privés:
 private:
 	// la taille de notre disque
 	int m_taille;
 	// la taille de notre jeu
 	int m_jeusize;
+	
 };
 
 
