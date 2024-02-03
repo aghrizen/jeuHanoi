@@ -1,3 +1,10 @@
+/*
+ ************************************************************************************
+ * Authors: salma.aghrizen@etu.univ-cotedazur.fr, bastien.briat@etu.univ-cotedazur.fr
+ ************************************************************************************
+ * Ce script contient la déclaration de la classe ToursHanoi
+ */
+
 #include <SDL2/SDL.h>
 #include "Tours.hpp"
 const int T_MAX = 3; // le nombre MAX des tours
