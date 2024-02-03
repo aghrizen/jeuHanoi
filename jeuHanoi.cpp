@@ -43,15 +43,36 @@ bool ToursHanoi::deplacer(int po, int pd) {
  * --> inter: la tour intérmediaire
  */
 void ToursHanoi::hanoi(int n, int orig, int dest, int inter) {
-	if (n > 0) {
-		hanoi(n - 1, orig, inter, dest);
-		deplacer(orig, dest);
-		afficherTours();
-		afficherToursNew();
-		std::this_thread::sleep_for(std::chrono::milliseconds(200));
-		
-		hanoi(n - 1, inter, dest, orig);
-	}
+    // On définit la condition de l'arrêt récursif : si n=0, la fonction se termine.
+    if (n > 0) {
+        // Étape 1 : Déplacer (n-1) disques de la tour d'origine à la tour intermédiaire
+        hanoi(n - 1, orig, inter, dest);
+
+        // Étape 2 : Déplacer le disque restant de la tour d'origine à la tour de destination
+        deplacer(orig, dest);
+
+        // Étape 3 : Afficher l'état actuel des tours après le déplacement
+        afficherTours();
+
+        // Étape 4 : Afficher une nouvelle représentation graphique des tours (fonction non définie)
+        afficherToursNew();
+
+        // Étape 5 : Attente de 500ms pour voir les étapes de la résolution
+        SDL_Event event;
+        Uint32 startTime = SDL_GetTicks();
+
+        while (SDL_GetTicks() - startTime < 500) {
+            // On vérifie les événements de SDL
+            while (SDL_PollEvent(&event)) {
+                if (event.type == SDL_QUIT) {
+                    SDL_Quit(); // Quitter l'application si l'utilisateur ferme la fenêtre
+                }
+            }
+        }
+
+        // Étape 6 : Déplacer (n-1) disques de la tour intermédiaire à la tour de destination
+        hanoi(n - 1, inter, dest, orig);
+    }
 }
 
 /*
