@@ -18,6 +18,12 @@
 #include <iostream>
 using namespace std;
 
+ /*
+  * Rôle: déplacer le disque de la position origine vers la position destination
+  * paramètres:
+  * --> po: position d'origine
+  * --> pd: position de destination
+  */
 bool ToursHanoi::deplacer(int po, int pd) {
 	bool IsMovePossible;
 	Tour* orig = m_tours[po];
@@ -110,6 +116,9 @@ void ToursHanoi::afficherTours() {
 	cout << s << endl;
 }
 
+/*
+ * Cette fonction affiche l'état mis à jour des tours en utilisant SDL
+ */
 void ToursHanoi::afficherToursNew() 
 {
 	int SpaceBetweenTower = 20;
@@ -120,12 +129,14 @@ void ToursHanoi::afficherToursNew()
 	int SizeCurrentDisque;
 	int CurentTowerCenterX;
 
-	
+	// Définir la couleur de dessin du rendu en noir et effacer le rendu 
 	SDL_SetRenderDrawColor(myRenderer, 0, 0, 0, 255);
 	SDL_RenderClear(myRenderer);
 
+	// Itérer à travers chaque tour pour dessiner leur état actuel 
 	for (int indexTower = 0; indexTower < T_MAX; indexTower++)
 	{
+		// Calculer la position X pour le centre de la tour actuelle 
 		if (indexTower == 0)
 		{
 			CurentTowerCenterX = MaximumXSize / 2;
@@ -134,11 +145,13 @@ void ToursHanoi::afficherToursNew()
 		{
 			CurentTowerCenterX = CurentTowerCenterX + MaximumXSize + SpaceBetweenTower;
 		}
-		//DrawTower(indexTower, );
+		//Itérer à travers chaque disque sur la tour actuelle et le dessiner 
 		for (int indexDisque = 0; indexDisque < m_hauteur; indexDisque++)
 		{
+			// vérifier si le disque actuel existe sur la tour 
 			if (m_tours[indexTower]->getDisque(indexDisque) != NULL)
 			{
+				// obtenir la taille du disque actuel et appeler la fct DrawDisque
 				SizeCurrentDisque = m_tours[indexTower]->getDisque(indexDisque)->getTaille();
 				DrawDisque
 				(
@@ -147,11 +160,14 @@ void ToursHanoi::afficherToursNew()
 			}
 		}
 	}
+	// présenter le contenu rendu à l'écran
 	SDL_RenderPresent(myRenderer);
 
 }
 
-
+/*
+ * Cette fonction dessine un disque sur l'écran en utilisant SDL
+ */
 void ToursHanoi::DrawDisque(int SizeCurrentDisque, int indexTower, int indexDisque, int MinimumXSize, int MaximumXSize, int SizeY, int CurentTowerCenterX)
 {
 
@@ -160,52 +176,53 @@ void ToursHanoi::DrawDisque(int SizeCurrentDisque, int indexTower, int indexDisq
 	int DisqueXpos = CurentTowerCenterX - DisqueSizeX / 2;
 	int DisqueYpos = SIZE_Y_GAME_BOARD - ( 10 + indexDisque * SizeY) - SizeY;
 	
-	
-	unsigned char bleu[3]={170,219,225};
-	unsigned char	roseP[3]={255,182,193};
-	unsigned char	vert[3]={218,242,164};
-	unsigned char	beige[3]={245,245,220};
-	unsigned char	violetC[3] ={200,162,200};
-	unsigned char	violetP[3]={219,187,255};
-	unsigned char	beigeP[3]={222,184,135};
-	unsigned char	rouge[3]={255,211,210};
+	// Déclaration des couleurs utiliser pour des disques plus claires
+	// Nous avons 8 couleurs dans chaque disque a une couleur différente de l'autre 
+	unsigned char   COLOR_1[3]={170,219,225};
+	unsigned char	COLOR_2[3]={255,182,193};
+	unsigned char	COLOR_3[3]={218,242,164};
+	unsigned char	COLOR_4[3]={245,245,220};
+	unsigned char	COLOR_5[3] ={200,162,200};
+	unsigned char	COLOR_6[3]={219,187,255};
+	unsigned char	COLOR_7[3]={222,184,135};
+	unsigned char	COLOR_8[3]={255,211,210};
 
 
 	switch (SizeCurrentDisque % 8)
 	{
 		case 0:
-			CreateRect(DisqueXpos, DisqueYpos, DisqueSizeX, SizeY, bleu);
+			CreateRect(DisqueXpos, DisqueYpos, DisqueSizeX, SizeY, COLOR_1);
 			break;
 
 		case 1:
-			CreateRect(DisqueXpos, DisqueYpos, DisqueSizeX, SizeY, roseP);
+			CreateRect(DisqueXpos, DisqueYpos, DisqueSizeX, SizeY, COLOR_2);
 			break;
 
 		case 2:
-			CreateRect(DisqueXpos, DisqueYpos, DisqueSizeX, SizeY, vert);
+			CreateRect(DisqueXpos, DisqueYpos, DisqueSizeX, SizeY, COLOR_3);
 			break;
 			
 		case 3:
-			CreateRect(DisqueXpos, DisqueYpos, DisqueSizeX, SizeY, beige);
+			CreateRect(DisqueXpos, DisqueYpos, DisqueSizeX, SizeY, COLOR_4);
 			break;
 			
 		case 4:
-			CreateRect(DisqueXpos, DisqueYpos, DisqueSizeX, SizeY, violetC);
+			CreateRect(DisqueXpos, DisqueYpos, DisqueSizeX, SizeY, COLOR_5);
 			break;
 
 		case 5:
-			CreateRect(DisqueXpos, DisqueYpos, DisqueSizeX, SizeY, violetP);
+			CreateRect(DisqueXpos, DisqueYpos, DisqueSizeX, SizeY, COLOR_6);
 			break;
 			
 		case 6:
-			CreateRect(DisqueXpos, DisqueYpos, DisqueSizeX, SizeY, beigeP);
+			CreateRect(DisqueXpos, DisqueYpos, DisqueSizeX, SizeY, COLOR_7);
 			break;
 		case 7:
-			CreateRect(DisqueXpos, DisqueYpos, DisqueSizeX, SizeY, rouge);
+			CreateRect(DisqueXpos, DisqueYpos, DisqueSizeX, SizeY, COLOR_8);
 			break;
 
 		default:
-			CreateRect(DisqueXpos, DisqueYpos, DisqueSizeX, SizeY, rouge);
+			CreateRect(DisqueXpos, DisqueYpos, DisqueSizeX, SizeY, COLOR_1);
 		
 	}
 
@@ -214,6 +231,9 @@ void ToursHanoi::DrawDisque(int SizeCurrentDisque, int indexTower, int indexDisq
 
 }
 
+/*
+ * Cette fonction crée un rectangle avec une couleur donnée en utilisant SDL
+ */
 void ToursHanoi::CreateRect(int posX, int posY, int sizeX, int sizeY, unsigned char Color[3])
 
 {
@@ -268,30 +288,37 @@ void ToursHanoi::resoudre() {
 	}
 }
 
+/*
+ * Cette fonction exécute le jeu en permettant au joueur de jouer manuellement
+ */
 void ToursHanoi::jouer() {
-	initialiser();
+	initialiser(); // initialiser le jeu 
+
+	// variables pour la saisir du joueur 
 	string reponse = "";
 	int origine_index;
 	int destination_index;
 	bool IsMoveLegal;
+	// Initialisation de SDL 
 	InitSDL(&window);
 
+	// boucle principale du jeu tant que le joueur n'a pas gagné
 	while (checkWin() == false)
 	{
 		afficherToursNew();
 		afficherTours();
 
 		cout << "Choisir la colonne origine, puis la colonne destination, de 1 à 3, sans espace" << endl;
-		while(reponse.size() < 1)
+		while(reponse.size() < 1)   // attendre que le oueur saisie la réponse 
 		cin >> reponse;
-
+		// extraction des indices de la réponse du joueur 
 		origine_index = reponse[0] - '0';
 		destination_index = reponse[1] - '0';
 		reponse = "";
-
+		// vérifions si les indices sont valides 
 		if (origine_index >= 1 && origine_index <= 3 && destination_index >= 1 && destination_index <= 3)
 		{
-
+			// vérifions si le déplacement est légal et l'effectuer si c'est le cas 
 			IsMoveLegal = m_tours[origine_index - 1]->MoveDisk(m_tours[destination_index - 1]);
 
 			if (IsMoveLegal == true)
@@ -300,18 +327,17 @@ void ToursHanoi::jouer() {
 			}
 			else
 			{
-				//Aficher rouge
+				//Aficher message indiquant le numéro invalide 
 				cout << "Numéro de tour invalide, veuillez recommencer" << endl;
 			}
 		}
 		else
 		{
-			//Aficher rouge
+			//Aficher messsage indiquant numér invalide 
 			cout << "Numéro de tour invalide, veuillez recommencer" << endl;
 		}
 
 	}
-
 
 
 
@@ -325,11 +351,15 @@ void ToursHanoi::jouer() {
 	}
 }
 
+/*
+ * Cette fonction initialise la bibliothèque SDL
+ */
 unsigned char ToursHanoi::InitSDL(SDL_Window **window) {
-	if (0 != SDL_Init(SDL_INIT_VIDEO))
+	if (0 != SDL_Init(SDL_INIT_VIDEO)) // vérifions l'initialisation du SDL
 	{
 		return EXIT_FAILURE;
 	}
+	// Création de la fenêtre de jeu avec la taille spécifiée 
 	*window = SDL_CreateWindow("SDL2", 0, 0,
 		SIZE_X_GAME_BOARD, SIZE_Y_GAME_BOARD, SDL_WINDOW_SHOWN);
 	if (NULL == *window)
@@ -337,7 +367,7 @@ unsigned char ToursHanoi::InitSDL(SDL_Window **window) {
 		return EXIT_FAILURE;
 	}
 
-	SDL_CreateRenderer(*window, 0, SDL_INIT_VIDEO);
-	myRenderer = SDL_GetRenderer(*window);
+	SDL_CreateRenderer(*window, 0, SDL_INIT_VIDEO); // créer le renderer pour la fenêtre 
+	myRenderer = SDL_GetRenderer(*window); // obtenir le renderer de la fenêtre 
 	return 0;
 }
