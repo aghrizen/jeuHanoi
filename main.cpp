@@ -21,7 +21,7 @@ int main() {
 	int choixMode; // choix du mode de jeu: défailt ou démo
 	list<int> myliste;
 
-	std::cout << "Veuillez choisir un numéro des diques pour commencer le jeu: ";
+	std::cout << "Veuillez choisir un numéro des disques pour commencer le jeu: ";
 	std::cin >> nd;
 
 	cout << "Choisissez le mode de jeu :\n";
