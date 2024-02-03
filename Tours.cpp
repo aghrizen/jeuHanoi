@@ -17,15 +17,19 @@ Tour::Tour(int TowerTag)
 	TourSize = 0;
 }
 
-//Tour rempli de 1 à n
+//Constructeur de la classe tour, initialise la tour avec les disques 
+// Tour rempli de 1 à n
 Tour::Tour(int TowerTag, int n)
 {
-	TourTag = TowerTag;
-	TourSize = 0;
-	
+	TourTag = TowerTag; // attribuer un tag à la tour 
+	TourSize = 0; // initialiser la taille de la tour à 0 
+
+	// remplir la tour avec des disques de 1 à n
 	for (int indexDisque = n; indexDisque > 0; indexDisque--)
 	{
-		Disque* tempDisque = new Disque(indexDisque, MAX_DISQUE);
+		// créer un nouveau disque avec la taille correspondante 
+		Disque* tempDisque = new Disque(indexDisque, n);
+		// ajouter le disque à la liste des disques dans l'ordre 
 		ListeDisqueInOrder.push_back(tempDisque);
 		TourSize++;
 	}
